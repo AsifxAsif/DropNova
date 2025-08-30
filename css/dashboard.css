@@ -78,7 +78,7 @@ body {
 }
 
 .dashboard-actions button {
-    width: 100px;
+    width: auto;
     font-weight: bold;
     border: 2px solid #fff;
 }
@@ -145,17 +145,17 @@ body {
 
 /* File Actions */
 .file-actions {
-    gap: 10px;
+    gap: 5px;
     display: flex;
     flex-shrink: 0;
-    margin-left: 10px;
 }
 
 .file-actions button {
     color: #444;
     font-size: 14px;
     cursor: pointer;
-    padding: 5px 5px;
+    width: 30px;
+    padding: 5px 0px;
     border-radius: 6px;
     border: 1px solid #bbb;
     transition: all 0.3s ease;
@@ -163,47 +163,34 @@ body {
 
 .file-actions .view-btn:hover {
     color: white;
-    background-color: #4CAF50;
+    background-color: #3498db;
 }
 
 .file-actions .rename-btn:hover {
     color: white;
-    background-color: #FFA500;
+    background-color: #f1c40f;
 }
 
 .file-actions .delete-btn:hover {
     color: white;
-    background-color: #F44336;
+    background-color: #e74c3c;
 }
 
 .file-actions .download-btn:hover {
     color: white;
-    background-color: #2196F3;
+    background-color: #2ecc71;
 }
 
-/* Logout Button */
-.logout-container {
-    width: 100%;
-    display: flex;
-    margin-top: 10px;
-    padding-right: 10px;
-    justify-content: flex-end;
+.file-actions .comments-btn:hover {
+    color: white;
+    background-color: #9b59b6;
 }
 
-.logout-button {
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 6px;
-    background: #f44336;
-    transition: background 0.2s ease;
+.file-actions .share-btn:hover {
+    color: white;
+    background-color: #34495e;
 }
 
-.logout-button:hover {
-    background: #d32f2f;
-}
 
 /* Modal Styling */
 .modal {
@@ -240,6 +227,22 @@ body {
     background: #7494ec;
     flex-direction: column;
     justify-content: center;
+}
+
+/* Inputs and Selects in Modals */
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: all 0.3s ease;
 }
 
 /* Close Modal Button */
@@ -313,37 +316,8 @@ body {
     border-radius: 8px;
     line-break: strict;
     white-space: normal;
-    word-wrap: break-word; 
-    word-break: break-word; 
-}
-
-/* Rename Modal */
-#newFileName {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    margin-top: 10px;
-    border-radius: 6px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    transition: all 0.3s ease;
-}
-
-#renameModal .modal-content {
-    width: 90%;
-    display: flex;
-    color: #333;
-    max-width: 400px;
-    overflow: hidden;
-    position: relative;
-    padding: 30px 20px;
-    text-align: center;
-    align-items: center;
-    border-radius: 16px;
-    background: #7494ec;
-    flex-direction: column;
-    justify-content: center;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 /* Upload Ok Button */
@@ -424,14 +398,12 @@ body {
     background-color: #3f8841;
 }
 
-/* New CSS to fix filename wrapping in the delete modal */
-#deleteFileNameText {
+/* New CSS to fix filename wrapping in the delete modal and shared/comments modal */
+#deleteFileNameText,
+#share-modal .modal-content strong,
+#comments-modal .modal-content strong {
     word-break: break-all;
     white-space: normal;
-}
-
-#deleteFileNameText strong {
-    word-break: break-all;
 }
 
 /* Scrollbar styling */
@@ -470,4 +442,192 @@ body {
     #file-name {
         font-size: 12px;
     }
+}
+
+/* Shared files table styling */
+.share_flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.share_flex label {
+    margin-top: 10px;
+}
+
+#shared-files-wrapper {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Custom scrollbar for shared files */
+#shared-files-wrapper::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+#shared-files-wrapper::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f0f0f0;
+}
+
+#shared-files-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #3498db;
+}
+
+#shared-files-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #2176bd;
+}
+
+#shared-files-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    color: #333;
+    background-color: #fff;
+    table-layout: fixed;
+}
+
+/* Set the width for each column */
+#shared-files-table th:nth-child(1),
+#shared-files-table td:nth-child(1) {
+    width: 30%;
+}
+
+#shared-files-table th:nth-child(2),
+#shared-files-table td:nth-child(2) {
+    width: 15%;
+}
+
+#shared-files-table th:nth-child(3),
+#shared-files-table td:nth-child(3) {
+    width: 15%;
+}
+
+#shared-files-table th:nth-child(4),
+#shared-files-table td:nth-child(4) {
+    width: 10%;
+}
+
+#shared-files-table th,
+#shared-files-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #7a7a7a;
+    word-wrap: break-word;
+}
+
+#shared-files-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* Shared Files Table Buttons */
+#shared-files-wrapper #shared-files-table button {
+    background-color: transparent;
+    border: 1px solid #bbb;
+    padding: 5px;
+    margin: 1px 3px;
+    width: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#shared-files-wrapper #shared-files-table button i {
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+/* Hover effects for specific buttons */
+#shared-files-wrapper #shared-files-table button.view-btn:hover {
+    background-color: #3498db;
+}
+
+#shared-files-wrapper #shared-files-table button.rename-btn:hover {
+    background-color: #f1c40f;
+}
+
+#shared-files-wrapper #shared-files-table button.delete-btn:hover {
+    background-color: #e74c3c;
+}
+
+#shared-files-wrapper #shared-files-table button.download-btn:hover {
+    background-color: #2ecc71;
+}
+
+#shared-files-wrapper #shared-files-table button.comments-btn:hover {
+    background-color: #9b59b6;
+}
+
+#shared-files-wrapper #shared-files-table button.unshare-btn:hover {
+    background-color: #34495e;
+}
+
+/* Change icon color to white on hover */
+#shared-files-wrapper #shared-files-table button:hover i {
+    color: white;
+}
+
+/* Comments Table Styling */
+.comments-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    color: #000000;
+}
+
+.comments-table th,
+.comments-table td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.comments-table th {
+    background-color: #ffffff;
+    color: #3498db;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-bottom: 2px solid #3498db;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Scrollable container for comments */
+#comments-list {
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+
+/* Custom scrollbar for comments */
+#comments-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#comments-list::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f0f0f0;
+}
+
+#comments-list::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #3498db;
+}
+
+#comments-list::-webkit-scrollbar-thumb:hover {
+    background: #2176bd;
 }

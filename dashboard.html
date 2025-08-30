@@ -10,13 +10,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 </head>
 
 <body>
     <div id="navbarContainer"></div>
     <div class="dashboard-wrapper">
-        <!-- Dashboard Content -->
         <div class="dashboard-container">
             <div class="dashboard-header">
                 <img src="./resource/DropNova.png" alt="DropNova Logo">
@@ -24,21 +22,38 @@
 
             <div class="dashboard-actions">
                 <button class="btn" onclick="openModal()">Add File</button>
+                <button class="btn" id="showMyFilesBtn">My Files</button>
+                <button class="btn" id="showSharedFilesBtn">Shared with Me</button>
                 <input type="text" id="search" placeholder="Search files..." />
             </div>
 
             <div class="file-section">
-                <div class="file-container" id="fileList"></div>
-                <div class="logout-container">
-                    <form action="php/logout.php" method="POST">
-                        <button type="submit" class="logout-button">Logout</button>
-                    </form>
+                <div id="my-files-view">
+                    <div class="file-container" id="fileList"></div>
+                </div>
+
+                <div id="shared-files-view" style="display: none;">
+                    <h2>Shared with Me</h2>
+                    <div id="shared-files-wrapper">
+                        <table id="shared-files-table">
+                            <thead>
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>Shared By</th>
+                                    <th>Permission</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Create Folder Modal -->
     <div id="createFolderModal" class="modal">
         <div class="modal-content">
             <i class="fa-solid fa-xmark close-modal" onclick="closeFolderModal()"></i>
@@ -49,7 +64,6 @@
         </div>
     </div>
 
-    <!-- File Upload Modal -->
     <div class="modal" id="uploadModal">
         <div class="modal-content">
             <i class="fa-solid fa-xmark close-modal" onclick="closeModal()"></i>
@@ -67,10 +81,9 @@
         </div>
     </div>
 
-    <!-- Rename File Modal -->
     <div class="modal" id="renameModal">
         <div class="modal-content">
-            <i class="fa-solid fa-xmark close-modal" onclick="closeModal()"></i>
+            <i class="fa-solid fa-xmark close-modal" onclick="closeRenameModal()"></i>
             <h3>Rename File</h3>
             <form id="renameForm">
                 <input type="text" id="newFileName" placeholder="Enter new file name" required />
@@ -79,15 +92,13 @@
         </div>
     </div>
 
-    <!-- View File Modal -->
     <div id="viewFileModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeViewFileModal()">×</span>
+            <i class="fa-solid fa-xmark close-modal" onclick="closeViewFileModal()"></i>
             <div id="viewFileContent"></div>
         </div>
     </div>
 
-    <!-- Delete File Modal -->
     <div class="modal" id="deleteModal">
         <div class="modal-content">
             <i class="fa-solid fa-xmark close-modal" onclick="closeDeleteModal()"></i>
@@ -100,6 +111,45 @@
             </div>
         </div>
     </div>
+
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <i class="fa-solid fa-xmark close-modal" onclick="closeShareModal()"></i>
+            <h3>Share File</h3>
+            <p>File: <strong id="file-to-share-name"></strong></p>
+            <form id="share-form">
+                <div class="share_flex">
+                    <input type="hidden" id="share-file-id">
+                    <label for="share-email">Email:</label>
+                    <input type="email" id="share-email" placeholder="Recipient's email" required>
+                </div>
+                <div class="share_flex">
+                    <label for="permission-select">Permission:</label>
+                    <select id="permission-select">
+                        <option value="view">View</option>
+                        <option value="edit">Edit</option>
+                        <option value="delete">Delete</option>
+                    </select>
+                </div>
+                <p id="share-status" class="status-message"></p>
+                <button type="submit" class="upload-ok-button">Share</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="comments-modal" class="modal">
+        <div class="modal-content">
+            <i class="fa-solid fa-xmark close-modal" onclick="closeCommentsModal()"></i>
+            <h3>Comments on <strong id="file-comments-title"></strong></h3>
+            <div id="comments-list"></div>
+            <form id="comment-form">
+                <input type="hidden" id="comment-file-id">
+                <textarea id="comment-text" placeholder="Add a comment..." required></textarea>
+                <button type="submit" class="upload-ok-button">Post Comment</button>
+            </form>
+        </div>
+    </div>
+
     <script src="js/dashboard.js"></script>
 </body>
 

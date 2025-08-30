@@ -17,7 +17,7 @@ try {
     $sql = "SELECT DISTINCT category FROM uploaded_files WHERE user_id = ?";
 
     // Exclude NULL or empty categories if they exist, and 'other' if you don't want it as a main folder
-    $sql .= " AND category IS NOT NULL AND category != '' AND category != 'other'";
+    $sql .= " AND category IS NOT NULL AND category != ''";
 
     $sql .= " ORDER BY category ASC"; // Order alphabetically
 

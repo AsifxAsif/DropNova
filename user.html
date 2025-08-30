@@ -7,61 +7,95 @@
     <title>User Profile</title>
     <link rel="stylesheet" href="css/user.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="shortcut icon" href="resource/favicon.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div id="navbarContainer"></div>
+
     <div class="container">
-        <!-- User Profile Form -->
-        <div class="form-box">
-            <h1>User Profile</h1>
-            <form id="updatePasswordForm" action="php/update_password.php" method="POST">
-                <div class="input-box">
-                    <input type="text" name="username" id="username" placeholder="Username" required disabled />
-                </div>
-                <div class="input-box">
-                    <input type="email" name="email" id="email" placeholder="Email" required disabled />
-                </div>
-                <div class="input-box">
-                    <input type="password" name="old_password" id="old_password" placeholder="Old Password" required />
-                    <i class="fas fa-eye" id="toggleOldPassword"
-                        onclick="togglePassword('old_password', 'toggleOldPassword')"></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" name="new_password" id="new_password" placeholder="New Password" required />
-                    <i class="fas fa-eye" id="toggleNewPassword"
-                        onclick="togglePassword('new_password', 'toggleNewPassword')"></i>
-                </div>
-                <button type="submit" class="btn">Update Password</button>
-            </form>
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="form-box">
+                <h1>User Profile</h1>
+                <form id="updatePasswordForm" action="php/update_password.php" method="POST">
+                    <div style="display: flex; justify-content: space-between; gap: 10px;">
+                        <div class="input-box">
+                            <input type="text" name="username" id="username" placeholder="Username" required disabled />
+                        </div>
 
-            <!-- Success/Error Message Display -->
-            <div id="message" class="mt-4" style="display: none; padding: 10px; border-radius: 5px;"></div>
-        </div>
+                        <div class="input-box">
+                            <input type="email" name="email" id="email" placeholder="Email" required disabled />
+                        </div>
+                    </div>
 
+                    <div class="input-box">
+                        <input type="password" name="old_password" id="old_password" placeholder="Old Password"
+                            required />
+                        <i class="fas fa-eye" id="toggleOldPassword"
+                            onclick="togglePassword('old_password', 'toggleOldPassword')"></i>
+                    </div>
 
-        <div class="relative group inline-block">
-            <div class="bg-white py-2 rounded-md shadow-lg hover:cursor-pointer flex justify-center items-center px-4">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 14" height="25" width="25">
-                    <path fill="#FFA000"
-                        d="M16.2 1.75H8.1L6.3 0H1.8C0.81 0 0 0.7875 0 1.75V12.25C0 13.2125 0.81 14 1.8 14H15.165L18 9.1875V3.5C18 2.5375 17.19 1.75 16.2 1.75Z">
-                    </path>
-                    <path fill="#FFCA28"
-                        d="M16.2 2H1.8C0.81 2 0 2.77143 0 3.71429V12.2857C0 13.2286 0.81 14 1.8 14H16.2C17.19 14 18 13.2286 18 12.2857V3.71429C18 2.77143 17.19 2 16.2 2Z">
-                    </path>
-                </svg>
-                <p>Project Structure</p>
+                    <div class="input-box">
+                        <input type="password" name="new_password" id="new_password" placeholder="New Password"
+                            required />
+                        <i class="fas fa-eye" id="toggleNewPassword"
+                            onclick="togglePassword('new_password', 'toggleNewPassword')"></i>
+                    </div>
+
+                    <button type="submit" class="btn">Update Password</button>
+                </form>
+                <div id="message"></div>
             </div>
 
-            <div
-                class="absolute left-0 mt-2 w-64 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                <ul class="p-4 space-y-1" id="projectTree">
-                </ul>
+            <!-- File Tree Section -->
+            <div class="file-tree-container">
+                <div class="file-tree-header">
+                    <i class="fas fa-folder-tree file-tree-icon"></i>
+                    <p>Project Structure</p>
+                </div>
+                <div class="file-tree-content">
+                    <ul id="projectTree" class="project-tree"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights Section -->
+        <div class="insights-section">
+            <h2>Your Insights</h2>
+            <div class="stats-cards">
+                <div class="card">
+                    <i class="fas fa-upload card-icon"></i>
+                    <p>Total Files</p>
+                    <h3 id="totalFilesCount">0</h3>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-download card-icon"></i>
+                    <p>Total Downloads</p>
+                    <h3 id="totalDownloadsCount">0</h3>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-share-alt card-icon"></i>
+                    <p>Files Shared</p>
+                    <h3 id="filesSharedCount">0</h3>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>File Type Distribution</h3>
+                <canvas id="fileTypeChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3>Activity Trend (Last 7 Days)</h3>
+                <canvas id="activityChart"></canvas>
             </div>
         </div>
     </div>

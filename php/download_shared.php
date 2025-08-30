@@ -29,11 +29,11 @@ try {
         echo json_encode(['error' => 'File not found.']);
         exit();
     }
-
+    
     // Log the download with both the uploader's user_id and the downloader's user_id
     $insertStmt = $conn->prepare("INSERT INTO file_downloads (file_id, user_id, downloader_id) VALUES (:file_id, :user_id, :downloader_id)");
     $insertStmt->bindParam(':file_id', $fileId, PDO::PARAM_INT);
-    $insertStmt->bindParam(':user_id', $file_data['user_id'], PDO::PARAM_INT); // This is the corrected line
+    $insertStmt->bindParam(':user_id', $file_data['user_id'], PDO::PARAM_INT);
     $insertStmt->bindParam(':downloader_id', $downloaderId, PDO::PARAM_INT);
     $insertStmt->execute();
 
@@ -46,6 +46,7 @@ try {
     header('Cache-Control: must-revalidate');
     readfile('../uploads/' . $file_data['filepath']);
     exit();
+
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);

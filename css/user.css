@@ -1,24 +1,15 @@
-/* User Page Styling */
+/* General Styling */
+html,
 body {
-    background: #81d4fa;
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: 'Poppins', sans-serif;
+    background: #81d4fa;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
-
-.container {
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    width: 90%;
-    max-width: 1000px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    overflow: hidden;
 }
 
 #bgBubble {
@@ -34,181 +25,331 @@ body {
     opacity: 0.7;
 }
 
-/* Form Section Styling */
-.form-box {
+.container {
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%;
+    max-width: 1500px;
+    height: 75vh;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+}
+
+/* Profile Section Styling */
+.profile-section {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    border-right: 2px solid black;
-    padding-right: 30px;
+    border-right: 2px solid #e0e0e0;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
     font-size: 2.5rem;
     font-weight: 600;
     text-align: center;
-    color: #333;
-    margin-bottom: 20px;
+    color: #2c3e50;
 }
 
-h2 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #333;
-}
-
-.input-box {
-    margin: 20px 0;
+.form-box {
+    display: flex;
+    flex-direction: column;
 }
 
 .input-box {
     position: relative;
+    margin: 5px 0;
 }
 
 .input-box input {
-    width: calc(100% - 30px);
+    min-width: 300px;
+    width: 100%;
     padding: 14px;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #bbb;
     font-size: 16px;
     color: #333;
     background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+.input-box input:disabled {
+    background-color: #e9ecef;
 }
 
 .input-box i {
     position: absolute;
-    top: 14px;
-    right: 10px;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
-    color: #333;
+    color: #95a5a6;
+    transition: color 0.3s ease;
 }
 
-
-.input-box input:disabled {
-    background-color: #e0e0e0;
+.input-box i:hover {
+    color: #34495e;
 }
 
 .btn {
     width: 100%;
     padding: 14px;
     border: none;
-    background-color: #4c6ef5;
+    background-color: #3498db;
     color: white;
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 10px;
 }
 
 .btn:hover {
-    background-color: #3653a3;
+    background-color: #2980b9;
 }
 
-/* Project Tree Section */
-.relative.group {
-    position: relative;
-    display: inline-block;
-}
-
-.bg-white {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
+#message {
+    text-align: center;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    cursor: pointer;
-}
-
-.bg-white svg {
-    fill: #ffa000;
-}
-
-.bg-white p {
     font-weight: 600;
-    font-size: 1.2rem;
-    color: #333;
 }
 
-.absolute {
-    left: 0;
-    top: 60px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    display: none;
-    width: 350px;
-    max-height: 300px;
-    /* Limit the height */
-    overflow-y: auto;
-    /* Enable vertical scrolling */
-    scrollbar-width: thin;
-    scrollbar-color: #4c6ef5 #f1f1f1;
-    /* Custom scrollbar color */
-}
-
-/* Custom Scrollbar Styles */
-.absolute::-webkit-scrollbar {
-    width: 8px;
-}
-
-.absolute::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-    /* Light background for the track */
-}
-
-.absolute::-webkit-scrollbar-thumb {
-    background-color: #4c6ef5;
-    /* Blue color for the scrollbar thumb */
-    border-radius: 4px;
-}
-
-/* Show the scroll bar when hovering over the group */
-.relative.group:hover .absolute {
+#message span {
     display: block;
 }
 
-ul {
-    list-style-type: none;
-    padding-left: 20px;
-    font-size: 1rem;
-    color: #444;
+/* Insights Section Styling */
+.insights-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    padding: 20px 40px;
 }
 
-ul li {
+/* Custom Scrollbar for Insights Section */
+.insights-section::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.insights-section::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.insights-section::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+    border-radius: 10px;
+}
+
+.insights-section::-webkit-scrollbar-thumb:hover {
+    background-color: #2980b9;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid #bbb;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card .card-icon {
+    font-size: 2.5rem;
     margin-bottom: 10px;
+    color: #3498db;
 }
 
-ul li:hover {
-    background-color: #f4f4f4;
-    cursor: pointer;
+.card p {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin: 0;
 }
 
-/* Responsiveness */
-@media screen and (max-width: 768px) {
+.card h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 5px 0 0;
+}
+
+.chart-container {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #bbb;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    min-width: 300px;
+}
+
+.chart-container h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #34495e;
+    text-align: center;
+}
+
+/* File Tree Styling */
+.file-tree-container {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 25px;
+    margin-top: 20px;
+    border: 1px solid #bbb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    flex-grow: 1;
+    max-width: 565px;
+    height: 20vh;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+/* Custom Scrollbar for File Tree */
+.file-tree-container::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.file-tree-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.file-tree-container::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+    border-radius: 10px;
+}
+
+.file-tree-container::-webkit-scrollbar-thumb:hover {
+    background-color: #2980b9;
+}
+
+.file-tree-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.file-tree-header p {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+}
+
+.file-tree-icon {
+    font-size: 1.5rem;
+    color: #ffa000;
+}
+
+/* New tree line styling */
+.project-tree, .project-tree ul {
+    list-style: none;
+    padding-left: 1.25rem;
+    position: relative;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.project-tree::-webkit-scrollbar,
+.project-tree ul::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.project-tree::-webkit-scrollbar-track,
+.project-tree ul::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.project-tree::-webkit-scrollbar-thumb,
+.project-tree ul::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+    border-radius: 10px;
+}
+
+.project-tree::-webkit-scrollbar-thumb:hover,
+.project-tree ul::-webkit-scrollbar-thumb:hover {
+    background-color: #2980b9;
+}
+
+.project-tree li {
+    position: relative;
+    padding: 5px 0;
+    word-wrap: break-word;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+}
+
+/* Horizontal line for each list item */
+.project-tree li::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    width: 10px;
+    height: 1px;
+    background-color: #ccc;
+    transform: translateY(-50%);
+}
+
+/* Vertical lines for nested lists */
+.project-tree ul::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    background-color: #ccc;
+}
+
+/* Hiding the vertical line on the last item of a list */
+.project-tree li:last-child ul::before {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
     .container {
         grid-template-columns: 1fr;
-        /* Stack on smaller screens */
-        padding: 20px;
+        padding: 30px;
+        height: auto;
+        overflow-y: auto;
     }
 
-    .form-box {
-        margin-bottom: 15px;
+    .profile-section {
+        border-right: none;
+        padding-right: 0;
+        margin-bottom: 30px;
     }
 
-    .input-box input {
-        font-size: 14px;
-    }
-
-    .btn {
-        font-size: 14px;
-    }
-
-    .bg-white p {
-        font-size: 1rem;
+    .insights-section {
+        overflow-y: visible;
     }
 }
