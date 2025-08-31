@@ -48,13 +48,50 @@ function applyTranslations() {
         'dashboard.html': {
             '#addFileBtn': 'add_file_button',
             '#clickUpload': 'click_upload',
-            '#renameFile' : 'rename_file',
-            '#deleteFile' : 'delete_file',
-            '#deleteFileNameText' : 'delete_msg',
-            '#rename' : 'rename',
+            '#renameFile': 'rename_file',
+            '#deleteFile': 'delete_file',
+            '#confirmDelete': 'delete',
+            '#cancelDelete': 'cancel',
+            '#rename': 'rename',
+            '#shareFileTitle': 'share_file_title',
+            '#shareButton': 'share_button',
+            '#file': 'file',
+            '#email': 'email',
+            '#permission': 'permission',
+            '#viewPermission': 'view_permission',
+            '#editPermission': 'edit_permission',
+            '#deletePermission': 'delete_permission',
+            '#commentsTitle': 'comments_title',
             '#selectFile': 'select_file_title',
             '#showMyFilesBtn': 'my_files_button',
             '#showSharedFilesBtn': 'shared_with_me_button',
+        },
+
+        // -- Dynamic elements (modals, etc.) --
+        'modals': {
+            '#uploadStatusTitle': 'upload_status',
+            '#okButton': 'ok_button',
+            '#createFolderTitle': 'create_folder_title',
+            '#folderNamePlaceholder': {
+                placeholder: 'folder_name_placeholder'
+            },
+            '#createButton': 'create_button',
+            '#closeButton': 'close_button',
+            '#deleteFileTitle': 'delete_file_title',
+            '#deleteConfirmation': 'delete_confirmation',
+            '#deleteButton': 'delete_button',
+            '#cancelButton': 'cancel_button',
+            '#shareEmailPlaceholder': {
+                placeholder: 'share_email_placeholder'
+            },
+            '#commentPlaceholder': {
+                placeholder: 'comment_placeholder'
+            },
+            '#postCommentButton': 'post_comment_button',
+            // Specific keys for modals from files.js
+            '#deleteFileTitle': 'deleteFileTitle',
+            '#confirmDelete': 'deleteButton',
+            '#cancelDelete': 'cancelButton',
         },
 
         // -- user.html --
@@ -75,40 +112,6 @@ function applyTranslations() {
                 placeholder: 'new_password_placeholder'
             },
             '#logoutButton': 'logout_button',
-        },
-
-        // -- Dynamic elements (modals, etc.) --
-        'modals': {
-            '#uploadStatusTitle': 'upload_status',
-            '#okButton': 'ok_button',
-            '#createFolderTitle': 'create_folder_title',
-            '#folderNamePlaceholder': {
-                placeholder: 'folder_name_placeholder'
-            },
-            '#createButton': 'create_button',
-            '#closeButton': 'close_button',
-            '#deleteFileTitle': 'delete_file_title',
-            '#deleteConfirmation': 'delete_confirmation',
-            '#deleteButton': 'delete_button',
-            '#cancelButton': 'cancel_button',
-            '#shareFileTitle': 'share_file_title',
-            '#shareEmailPlaceholder': {
-                placeholder: 'share_email_placeholder'
-            },
-            '#permission': 'permission',
-            '#viewPermission': 'view_permission',
-            '#editPermission': 'edit_permission',
-            '#deletePermission': 'delete_permission',
-            '#shareButton': 'share_button',
-            '#commentsTitle': 'comments_title',
-            '#commentPlaceholder': {
-                placeholder: 'comment_placeholder'
-            },
-            '#postCommentButton': 'post_comment_button',
-            // Specific keys for modals from files.js
-            '#deleteFileTitle': 'deleteFileTitle',
-            '#confirmDelete': 'deleteButton',
-            '#cancelDelete': 'cancelButton',
         }
     };
 
@@ -140,19 +143,23 @@ window.getTranslation = function (key) {
 
 // Initial language load on page load
 document.addEventListener('DOMContentLoaded', async () => {
-    await fetchLanguageData();
+    // Check for a saved language in localStorage
+    const savedLang = localStorage.getItem('lang') || 'en'; // Default to 'en'
+
+    await fetchLanguageData(savedLang);
     applyTranslations();
 
-    // Add event listeners for language switch buttons
-    document.querySelectorAll('.lang-switcher').forEach(button => {
-        button.addEventListener('click', async (event) => {
-            const newLang = event.target.dataset.lang;
-            if (newLang) {
-                // Fetch the translations for the new language
-                await fetchLanguageData(newLang);
-                // Apply the new translations to the page
-                applyTranslations();
-            }
-        });
+    // Set the initial state of the checkbox based on the saved language
+    const languageToggle = document.getElementById('languageToggle');
+    if (languageToggle) {
+        languageToggle.checked = savedLang === 'bn';
+    }
+
+    // Add event listener to the checkbox for state change
+    languageToggle.addEventListener('change', async (event) => {
+        const newLang = event.target.checked ? 'bn' : 'en';
+        localStorage.setItem('lang', newLang);
+        await fetchLanguageData(newLang);
+        applyTranslations();
     });
 });

@@ -12,6 +12,12 @@ body {
     overflow: hidden;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #bgBubble {
     left: 87.5%;
 }

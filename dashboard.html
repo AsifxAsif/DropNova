@@ -115,24 +115,24 @@
     <div id="share-modal" class="modal">
         <div class="modal-content">
             <i class="fa-solid fa-xmark close-modal" onclick="closeShareModal()"></i>
-            <h3>Share File</h3>
-            <p>File: <strong id="file-to-share-name"></strong></p>
+            <h3 id="shareFileTitle">Share File</h3>
+            <p id="file">File: <strong id="file-to-share-name"></strong></p>
             <form id="share-form">
                 <div class="share_flex">
                     <input type="hidden" id="share-file-id">
-                    <label for="share-email">Email:</label>
+                    <label for="share-email" id="email">Email:</label>
                     <input type="email" id="share-email" placeholder="Recipient's email" required>
                 </div>
                 <div class="share_flex">
-                    <label for="permission-select">Permission:</label>
+                    <label for="permission-select" id="permission">Permission:</label>
                     <select id="permission-select">
-                        <option value="view">View</option>
-                        <option value="edit">Edit</option>
-                        <option value="delete">Delete</option>
+                        <option value="view" id="viewPermission">View</option>
+                        <option value="edit" id="editPermission">Edit</option>
+                        <option value="delete" id="deletePermission">Delete</option>
                     </select>
                 </div>
                 <p id="share-status" class="status-message"></p>
-                <button type="submit" class="upload-ok-button">Share</button>
+                <button type="submit" class="upload-ok-button" id="shareButton">Share</button>
             </form>
         </div>
     </div>
