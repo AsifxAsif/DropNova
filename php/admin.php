@@ -25,8 +25,8 @@ switch ($action) {
     case 'get_all':
         $data = [];
 
-        // Users
-        $stmt = $conn->query("SELECT id, username, email, role, created_at FROM users");
+        // Users - Modified to show only 'user' role
+        $stmt = $conn->query("SELECT id, username, email, role, created_at FROM users WHERE role = 'user'");
         $data['users'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Files
