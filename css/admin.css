@@ -1,13 +1,13 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 50px;
     background-color: #f4f7f9;
+    font-family: Arial, sans-serif;
 }
 
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
 h1 {
@@ -16,38 +16,38 @@ h1 {
 }
 
 h2 {
-    margin-top: 40px;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 5px;
     color: #555;
+    margin-top: 40px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #ccc;
 }
 
 .table-container {
-    max-height: 300px;
     overflow-y: auto;
+    max-height: 300px;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
     background-color: #fff;
+    border-collapse: collapse;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 th,
 td {
+    text-align: left;
     padding: 12px 15px;
     border: 1px solid #ddd;
-    text-align: left;
 }
 
 th {
-    background-color: #7494ec;
-    color: #fff;
-    text-transform: uppercase;
-    position: sticky;
     top: 0;
     z-index: 1;
+    color: #fff;
+    position: sticky;
+    text-transform: uppercase;
+    background-color: #7494ec;
 }
 
 tr:nth-child(even) {
@@ -55,29 +55,29 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #f1f1f1;
     cursor: pointer;
+    background-color: #f1f1f1;
 }
 
 /* Centered no-data message */
 td.no-data {
+    color: #888;
     text-align: center;
     font-style: italic;
-    color: #888;
 }
 
 button {
-    padding: 8px 12px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
     height: 30px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .delete-btn {
-    background-color: #dc3545;
     color: white;
+    background-color: #dc3545;
 }
 
 .delete-btn:hover {
@@ -85,9 +85,9 @@ button {
 }
 
 .logout-btn {
-    background-color: #dc3545;
-    color: white;
     float: right;
+    color: white;
+    background-color: #dc3545;
 }
 
 .logout-btn:hover {
@@ -100,16 +100,16 @@ button {
 }
 
 .table-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
     border-radius: 10px;
+    background: #f1f1f1;
 }
 
 .table-container::-webkit-scrollbar-thumb {
-    background: #7494ec;
     border-radius: 10px;
+    background: #7494ec;
 }
 
 .table-container::-webkit-scrollbar-thumb:hover {
-    background: #5b7acf;
     cursor: pointer;
+    background: #5b7acf;
 }

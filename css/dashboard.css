@@ -151,10 +151,10 @@ body {
 }
 
 .file-actions button {
+    width: 30px;
     color: #444;
     font-size: 14px;
     cursor: pointer;
-    width: 30px;
     padding: 5px 0px;
     border-radius: 6px;
     border: 1px solid #bbb;
@@ -402,8 +402,8 @@ body {
 #deleteFileNameText,
 #share-modal .modal-content strong,
 #comments-modal .modal-content strong {
-    word-break: break-all;
     white-space: normal;
+    word-break: break-all;
 }
 
 /* Scrollbar styling */
@@ -459,8 +459,8 @@ body {
     max-height: 250px;
     overflow-y: auto;
     overflow-x: auto;
-    border: 1px solid #ccc;
     border-radius: 10px;
+    border: 1px solid #ccc;
 }
 
 /* Custom scrollbar for shared files */
@@ -485,11 +485,11 @@ body {
 
 #shared-files-table {
     width: 100%;
-    border-collapse: collapse;
     margin-top: 0;
     color: #333;
-    background-color: #fff;
     table-layout: fixed;
+    background-color: #fff;
+    border-collapse: collapse;
 }
 
 /* Set the width for each column */
@@ -517,27 +517,27 @@ body {
 #shared-files-table td {
     padding: 12px;
     text-align: left;
-    border: 1px solid #7a7a7a;
     word-wrap: break-word;
+    border: 1px solid #7a7a7a;
 }
 
 #shared-files-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    position: sticky;
     top: 0;
     z-index: 2;
+    position: sticky;
+    font-weight: bold;
+    background-color: #f2f2f2;
 }
 
 /* Shared Files Table Buttons */
 #shared-files-wrapper #shared-files-table button {
-    background-color: transparent;
-    border: 1px solid #bbb;
-    padding: 5px;
-    margin: 1px 3px;
     width: 30px;
-    border-radius: 4px;
+    padding: 5px;
     cursor: pointer;
+    margin: 1px 3px;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    background-color: transparent;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -579,37 +579,37 @@ body {
 /* Comments Table Styling */
 .comments-table {
     width: 100%;
+    font-size: 14px;
+    overflow: hidden;
+    color: #000000;
+    border-radius: 12px;
     border-collapse: collapse;
     background-color: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    font-size: 14px;
-    color: #000000;
 }
 
 .comments-table th,
 .comments-table td {
-    padding: 12px 16px;
     text-align: left;
+    padding: 12px 16px;
 }
 
 .comments-table th {
-    background-color: #ffffff;
-    color: #3498db;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 13px;
-    border-bottom: 2px solid #3498db;
-    position: sticky;
     top: 0;
     z-index: 1;
+    font-size: 13px;
+    color: #3498db;
+    font-weight: 600;
+    position: sticky;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    border-bottom: 2px solid #3498db;
 }
 
 /* Scrollable container for comments */
 #comments-list {
-    max-height: 250px;
     overflow-y: auto;
+    max-height: 250px;
     border-radius: 8px;
 }
 
