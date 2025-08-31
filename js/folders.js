@@ -352,10 +352,6 @@ $(document).ready(function () {
         }
     });
 
-    $('#addNewFolderButton').on('click', function () {
-        alert('Add New Folder functionality will go here!');
-    });
-
     AOS.init({
         duration: 800,
         once: true,

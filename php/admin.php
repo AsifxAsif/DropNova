@@ -69,6 +69,17 @@ switch ($action) {
         echo json_encode($data);
         break;
 
+    case 'delete_user':
+        $id = $_POST['id'] ?? null;
+        if ($id && $id != $_SESSION['user_id']) {
+            $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
+            $stmt->execute([$id]);
+            echo json_encode(["success" => true]);
+        } else {
+            echo json_encode(["error" => "Invalid user or cannot delete yourself"]);
+        }
+        break;
+
     default:
         echo json_encode(["error" => "Invalid action"]);
 }

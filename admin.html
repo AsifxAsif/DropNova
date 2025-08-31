@@ -3,107 +3,7 @@
 
 <head>
     <title>Admin Panel</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-            background-color: #f4f7f9;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        h2 {
-            margin-top: 40px;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-            color: #555;
-        }
-
-        .table-container {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        th,
-        td {
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        th {
-            background-color: #7494ec;
-            color: #fff;
-            text-transform: uppercase;
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-            cursor: pointer;
-        }
-
-        button {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            height: 30px;
-            transition: background-color 0.3s ease;
-        }
-
-        .logout-btn {
-            background-color: #dc3545;
-            color: white;
-            float: right;
-        }
-
-        .logout-btn:hover {
-            background-color: #c82333;
-        }
-
-        /* Customizable Scrollbar */
-        .table-container::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .table-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .table-container::-webkit-scrollbar-thumb {
-            background: #7494ec;
-            border-radius: 10px;
-        }
-
-        .table-container::-webkit-scrollbar-thumb:hover {
-            background: #5b7acf;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 
 <body>
@@ -113,122 +13,21 @@
     </div>
 
     <h2>Users</h2>
-    <div class="table-container">
-        <table id="usersTable"></table>
-    </div>
+    <table id="usersTable"></table>
 
     <h2>Files</h2>
-    <div class="table-container">
-        <table id="filesTable"></table>
-    </div>
+    <table id="filesTable"></table>
 
     <h2>Shared Files</h2>
-    <div class="table-container">
-        <table id="sharedTable"></table>
-    </div>
+    <table id="sharedTable"></table>
 
     <h2>Downloads</h2>
-    <div class="table-container">
-        <table id="downloadsTable"></table>
-    </div>
+    <table id="downloadsTable"></table>
 
     <h2>Comments</h2>
-    <div class="table-container">
-        <table id="commentsTable"></table>
-    </div>
+    <table id="commentsTable"></table>
 
-    <script>
-        async function loadAll() {
-            try {
-                const res = await fetch('php/admin.php?action=get_all');
-                const data = await res.json();
-
-                // If the session is invalid, the PHP script will return an error
-                if (data.error) {
-                    // Redirect to login page on forbidden access
-                    if (data.error === "Forbidden") {
-                        window.location.href = 'login.html';
-                    }
-                    console.error("Error fetching data:", data.error);
-                    return;
-                }
-
-                // Helper function to render tables
-                function renderTable(tableId, headers, data) {
-                    let html = '<thead><tr>';
-                    headers.forEach(header => {
-                        html += `<th>${header}</th>`;
-                    });
-                    html += '</tr></thead><tbody>';
-
-                    if (data.length > 0) {
-                        data.forEach(item => {
-                            html += '<tr>';
-                            Object.values(item).forEach(value => {
-                                html += `<td>${value}</td>`;
-                            });
-                            html += '</tr>';
-                        });
-                    } else {
-                        html += `<tr><td colspan="${headers.length}">No data available.</td></tr>`;
-                    }
-
-                    html += '</tbody>';
-                    document.getElementById(tableId).innerHTML = html;
-                }
-
-                // Render tables
-                renderTable('usersTable', ['ID', 'User name', 'Email', 'Role', 'Created At'], data.users);
-                renderTable('filesTable', ['ID', 'File name', 'Directory', 'Category', 'Uploaded At', 'Owner'], data.files);
-                renderTable('sharedTable', ['ID', 'File name', 'Shared By', 'Shared With', 'Permission', 'Shared At'], data.shared_files);
-                renderTable('downloadsTable', ['ID', 'File name', 'Owner', 'Downloader', 'Downloaded At'], data.downloads);
-                renderTable('commentsTable', ['ID', 'File name', 'Commenter', 'Comment', 'Commented At'], data.comments);
-
-            } catch (error) {
-                console.error('Failed to fetch data:', error);
-            }
-        }
-
-        // These functions are no longer called but are kept for reference
-        async function deleteUser(id) {
-            console.log(`Attempting to delete user with ID: ${id}`);
-            const res = await fetch('admin.php?action=delete_user', {
-                method: 'POST',
-                body: new URLSearchParams({ id })
-            });
-            const result = await res.json();
-            if (result.success) {
-                console.log(`Successfully deleted user with ID: ${id}`);
-                loadAll();
-            } else {
-                console.error(`Error deleting user: ${result.error}`);
-            }
-        }
-
-        async function deleteFile(id) {
-            console.log(`Attempting to delete file with ID: ${id}`);
-            const res = await fetch('admin.php?action=delete_file', {
-                method: 'POST',
-                body: new URLSearchParams({ id })
-            });
-            const result = await res.json();
-            if (result.success) {
-                console.log(`Successfully deleted file with ID: ${id}`);
-                loadAll();
-            } else {
-                console.error(`Error deleting file: ${result.error}`);
-            }
-        }
-
-        async function logout() {
-            // A simple logout could just be clearing the session, which we'll simulate by redirecting.
-            // In a real app, you'd have a logout.php script.
-            window.location.href = 'php/logout.php';
-        }
-
-        // Initial load
-        window.onload = loadAll;
-    </script>
+    <script src="js/admin.js"></script>
 </body>
 
 </html>
