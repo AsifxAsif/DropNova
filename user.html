@@ -48,7 +48,10 @@
                             onclick="togglePassword('new_password', 'toggleNewPassword')"></i>
                     </div>
 
-                    <button type="submit" class="btn">Update Password</button>
+                    <div style="display: flex; justify-content: space-between; gap: 10px;">
+                        <button type="submit" class="btn">Update Password</button>
+                        <button type="button" class="btn logout-btn" onclick="logout()">Logout</button>
+                    </div>
                 </form>
                 <div id="message"></div>
             </div>
@@ -57,7 +60,7 @@
             <div class="file-tree-container">
                 <div class="file-tree-header">
                     <i class="fas fa-folder-tree file-tree-icon"></i>
-                    <p>Project Structure</p>
+                    <p>My directory</p>
                 </div>
                 <div class="file-tree-content">
                     <ul id="projectTree" class="project-tree"></ul>

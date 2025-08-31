@@ -11,24 +11,22 @@ $(document).ready(function () {
     fetchInsights(); // Renamed and updated function to fetch insights
     loadProjectTree(); // Load the file tree on page load
 
-    // Intercept form submission to handle profile update via AJAX
-    $("#updateProfileForm").submit(function (e) {
+    // Intercept form submission to handle password update via AJAX
+    $("#updatePasswordForm").submit(function (e) {
         e.preventDefault(); // Prevent the default form submission
 
-        const username = $("input[name='username']").val();
         const oldPassword = $("input[name='old_password']").val();
         const newPassword = $("input[name='new_password']").val();
 
         // Make the AJAX request
         $.ajax({
-            url: 'php/update_profile.php',
+            url: 'php/update_password.php',
             type: 'POST',
             data: {
-                username: username,
                 old_password: oldPassword,
                 new_password: newPassword
             },
-            dataType: 'json', // This line is crucial to prevent page redirection
+            dataType: 'json',
             success: function (data) {
                 if (data.success) {
                     $('#message').html(`<span style="color: green;">${data.message}</span>`).fadeIn();
@@ -270,4 +268,11 @@ function togglePassword(passwordId, iconId) {
         icon.classList.remove("fa-eye-slash");
         icon.classList.add("fa-eye");
     }
+}
+
+// This is the new function to handle logout
+function logout() {
+    // The PHP script handles the redirection, so we simply navigate to it
+    // and let the browser handle the rest.
+    window.location.href = 'php/logout.php';
 }

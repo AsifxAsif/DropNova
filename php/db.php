@@ -10,6 +10,7 @@ try {
     $conn = new PDO("mysql:host=$host;charset=utf8", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // Check if database exists, otherwise create it
     $stmt = $conn->prepare("SHOW DATABASES LIKE :db_name");
     $stmt->execute([':db_name' => $db]);
 
@@ -19,17 +20,20 @@ try {
 
     $conn->exec("USE `$db`");
 
+    // Users table with role support
     $createUsersTable = "
     CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
+        role ENUM('user', 'admin') NOT NULL DEFAULT 'user',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
     ";
     $conn->exec($createUsersTable);
 
+    // Uploaded files table
     $createFilesTable = "
     CREATE TABLE IF NOT EXISTS uploaded_files (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -44,7 +48,7 @@ try {
     ";
     $conn->exec($createFilesTable);
 
-    // New table for file sharing
+    // File sharing table
     $createSharedFilesTable = "
     CREATE TABLE IF NOT EXISTS shared_files (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -60,7 +64,7 @@ try {
     ";
     $conn->exec($createSharedFilesTable);
 
-    // New table for file downloads
+    // File downloads table
     $createFileDownloadsTable = "
     CREATE TABLE IF NOT EXISTS file_downloads (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -75,7 +79,7 @@ try {
     ";
     $conn->exec($createFileDownloadsTable);
 
-    // New table for file comments
+    // File comments table
     $createFileCommentsTable = "
     CREATE TABLE IF NOT EXISTS file_comments (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -88,6 +92,12 @@ try {
     );
     ";
     $conn->exec($createFileCommentsTable);
+
+    // Ensure role column exists even if table was created earlier without it
+    $checkRoleColumn = $conn->query("SHOW COLUMNS FROM users LIKE 'role'");
+    if ($checkRoleColumn->rowCount() == 0) {
+        $conn->exec("ALTER TABLE users ADD COLUMN role ENUM('user','admin') NOT NULL DEFAULT 'user' AFTER password");
+    }
 } catch (PDOException $e) {
     error_log("Database connection failed: " . $e->getMessage());
     http_response_code(500);

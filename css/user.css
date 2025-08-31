@@ -110,6 +110,14 @@ h1 {
     background-color: #2980b9;
 }
 
+.logout-btn{
+    background-color: crimson;
+}
+
+.logout-btn:hover{
+    background-color: brown;
+}
+
 #message {
     text-align: center;
     border-radius: 8px;
@@ -131,8 +139,8 @@ h1 {
 
 /* Custom Scrollbar for Insights Section */
 .insights-section::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
 }
 
 .insights-section::-webkit-scrollbar-track {
@@ -312,10 +320,10 @@ h2 {
     position: absolute;
     left: -12px;
     top: 50%;
-    width: 10px;
+    width: 15px;
     height: 1px;
-    background-color: #ccc;
-    transform: translateY(-50%);
+    background-color: #888;
+    transform: translateY(-90%);
 }
 
 /* Vertical lines for nested lists */
@@ -326,7 +334,7 @@ h2 {
     bottom: 0;
     left: 0;
     width: 1px;
-    background-color: #ccc;
+    background-color: #888;
 }
 
 /* Hiding the vertical line on the last item of a list */

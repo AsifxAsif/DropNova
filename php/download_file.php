@@ -17,8 +17,10 @@ try {
     $conn = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Get the file details and the original uploader's user_id from the shared_files table
-    $stmt = $conn->prepare("SELECT uf.filepath, uf.filename, sf.shared_by_user_id AS user_id FROM uploaded_files uf JOIN shared_files sf ON uf.id = sf.file_id WHERE uf.id = :file_id");
+    // This is the corrected query. Instead of joining with 'shared_files',
+    // it now directly selects the file data from the 'uploaded_files' table,
+    // as this table contains all files.
+    $stmt = $conn->prepare("SELECT filepath, filename, user_id FROM uploaded_files WHERE id = :file_id");
     $stmt->bindParam(':file_id', $fileId, PDO::PARAM_INT);
     $stmt->execute();
     $file_data = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -33,7 +35,7 @@ try {
     // Log the download with both the uploader's user_id and the downloader's user_id
     $insertStmt = $conn->prepare("INSERT INTO file_downloads (file_id, user_id, downloader_id) VALUES (:file_id, :user_id, :downloader_id)");
     $insertStmt->bindParam(':file_id', $fileId, PDO::PARAM_INT);
-    $insertStmt->bindParam(':user_id', $file_data['user_id'], PDO::PARAM_INT); // This is the corrected line
+    $insertStmt->bindParam(':user_id', $file_data['user_id'], PDO::PARAM_INT); // This is the uploader's ID from uploaded_files
     $insertStmt->bindParam(':downloader_id', $downloaderId, PDO::PARAM_INT);
     $insertStmt->execute();
 
