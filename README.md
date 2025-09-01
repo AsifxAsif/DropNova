@@ -28,6 +28,10 @@ A fully responsive file storage and management system built for the CSE412 cours
 - ✅ **Rename files with modal confirmation**  
 - ✅ **Delete files with confirmation modal and success message**  
 - ✅ **Download files via button**  
+- ✅ **File Share System** based on existing users, through Email id
+- ✅ **File Permission** (`View`, `Edit`, `Delete`) and action buttons accordingly
+- ✅ **Commenting on files** for better understanding
+- ✅ **Multi language support** (Supports `English`, `Bangla`) 
 
 ---
 
