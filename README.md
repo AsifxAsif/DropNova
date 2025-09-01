@@ -32,6 +32,7 @@ A fully responsive file storage and management system built for the CSE412 cours
 - ✅ **File Permission** (`View`, `Edit`, `Delete`) and action buttons accordingly
 - ✅ **Commenting on files** for better understanding
 - ✅ **Multi language support** (Supports `English`, `Bangla`) 
+- ✅ **Admin panel** to control users with all activity log 
 
 ---
 
