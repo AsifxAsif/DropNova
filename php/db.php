@@ -5,7 +5,6 @@ $user = 'root';
 $pass = '';
 
 header('Content-Type: application/json');
-
 try {
     $conn = new PDO("mysql:host=$host;charset=utf8", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
