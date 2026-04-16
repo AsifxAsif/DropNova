@@ -1,7 +1,7 @@
 
 # 📁 DropNova - File Storage Web Application
 
-A fully responsive file storage and management system built for the CSE412 course project. This application allows users to register, log in, upload text or image files, and view/manage them through a clean dashboard interface.
+A fully responsive file storage and management system built for the "Software Engineering" course project. This application allows users to register, log in, upload text or image files, and view/manage them through a clean dashboard interface.
 
 ---
 
