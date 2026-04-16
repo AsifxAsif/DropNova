@@ -1,18 +1,7 @@
 
-# 📁 CSE412 Group 2 - File Storage Web Application
+# 📁 DropNova - File Storage Web Application
 
 A fully responsive file storage and management system built for the CSE412 course project. This application allows users to register, log in, upload text or image files, and view/manage them through a clean dashboard interface.
-
----
-
-## 🧑‍🤝‍🧑 Group Members
-
-| Name                   | Student ID    |
-|------------------------|---------------|
-| Md. Asifuzzaman        | 2021-3-60-167 |
-| Tawhidur Rahman        | 2021-3-60-233 |
-| Arpita Biswas Deepa    | 2021-3-60-055 |
-| Md. Mehedi Hasan Tazim | 2021-3-60-080 |
 
 ---
 
@@ -48,7 +37,7 @@ A fully responsive file storage and management system built for the CSE412 cours
 ## 📂 Folder Structure
 
 ```
-CSE412_group2/
+DropNova/
 ├── css/
 │   ├── 404.css                         # Styling for the 404 page
 │   ├── admin.css                       # Styling for the admin page
@@ -125,8 +114,8 @@ CSE412_group2/
 ## ⚙️ Setup Instructions
 
 1. **Install XAMPP** and run Apache & MySQL.  
-2. **Place the project** folder in `htdocs` directory (e.g., `C:\xampp\htdocs\CSE412_group2`).  
-3. **Start MySQL** and just go to `http://localhost/CSE412_group2/`. The code auto generated the database named `group2`:
+2. **Place the project** folder in `htdocs` directory (e.g., `C:\xampp\htdocs\DropNova`).  
+3. **Start MySQL** and just go to `http://localhost/DropNova/`. The code auto generated the database named `group2`:
 
 ```sql
 CREATE TABLE IF NOT EXISTS users (
@@ -189,7 +178,7 @@ CREATE TABLE IF NOT EXISTS file_comments (
 
 4. **Run the project** in your browser:  
 ```
-http://localhost/CSE412_group2/index.html
+http://localhost/DropNova/index.html
 ```
 
 5. **Register a user**, log in, and start uploading!
