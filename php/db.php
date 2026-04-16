@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db = 'group2';
+$db = 'dropnova';
 $user = 'root';
 $pass = '';
 
